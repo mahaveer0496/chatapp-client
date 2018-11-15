@@ -1,0 +1,19 @@
+.grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr 70px;
+  grid-template-areas: 'SidebarArea MessagesArea' '. TypingArea';
+}
+
+.TypingArea {
+  grid-area: TypingArea;
+}
+
+.SidebarArea {
+  grid-area: SidebarArea;
+}
+
+.MessagesArea {
+  grid-area: MessagesArea;
+}
