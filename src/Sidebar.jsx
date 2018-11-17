@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export default class Sidebar extends Component {
   static propTypes = {
-    prop: PropTypes
+    // prop: PropTypes
   }
 
   render() {

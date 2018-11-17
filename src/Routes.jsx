@@ -6,8 +6,8 @@ import ChatPage from './ChatPage'
 function Routes() {
   return (
     <Switch>
-      {RoutesArr.map(route => (
-        <Route {...route} component={route.component} />
+      {RoutesArr.map((route, i) => (
+        <Route key={i} {...route} component={route.component} />
       ))}
     </Switch>
   )
