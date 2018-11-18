@@ -6,22 +6,30 @@ export default class Home extends Component {
   static propTypes = {
     // prop: PropTypes
   }
+  state = {
+    error: false
+  }
   submitHandler = e => {
     e.preventDefault()
     const { username } = e.target.elements
-    console.log(username.value)
     loginUser(username.value).then(data => {
-      console.log(data)
+      if (data.error) {
+        this.setState({
+          error: true
+        })
+      } else {
+        this.props.history.push('/chat')
+      }
     })
-    // this.props.history.push('/chat')
   }
 
   render() {
     const { submitHandler } = this
-
+    const { error } = this.state
     return (
       <form onSubmit={submitHandler}>
         <input type="text" name="username" />
+        {error && <p className="helper">Please choose another name</p>}
         <input type="submit" value="Proceed" />
       </form>
     )

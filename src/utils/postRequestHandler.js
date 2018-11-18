@@ -6,4 +6,4 @@ export const loginUser = username =>
   fetch(loginUrl, {
     method: 'POST',
     body: JSON.stringify(username)
-  })
+  }).then(data => data.json())
