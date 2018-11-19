@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
-
 import Sidebar from './Sidebar'
 
 const socket = io('http://localhost:4000')
-
 export default class App extends Component {
   state = {
     message: ''
@@ -15,6 +13,7 @@ export default class App extends Component {
         message: data
       })
     })
+    socket.emit('getUsers')
   }
 
   emitChange = e => {

@@ -1,16 +1,32 @@
 import { Switch, Route } from 'react-router-dom'
-import React from 'react'
+import React, { createContext, Component } from 'react'
 import Home from './Home'
 import ChatPage from './ChatPage'
 
-function Routes() {
-  return (
-    <Switch>
-      {RoutesArr.map((route, i) => (
-        <Route key={i} {...route} component={route.component} />
-      ))}
-    </Switch>
-  )
+class Routes extends Component {
+  state = {
+    users: []
+  }
+  updateUsers = user => {
+    this.setState({
+      users: [...this.state.users, user]
+    })
+  }
+
+  render() {
+    const { updateUsers } = this
+    const { users } = this.state
+    return (
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render={() => <Home updateUsers={updateUsers} />}
+        />
+        <Route path="/chat" exact render={() => <ChatPage users={users} />} />
+      </Switch>
+    )
+  }
 }
 
 const RoutesArr = [

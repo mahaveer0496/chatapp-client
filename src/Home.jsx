@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { loginUser } from './utils/postRequestHandler'
 
-export default class Home extends Component {
+class Home extends Component {
   static propTypes = {
     // prop: PropTypes
   }
@@ -18,10 +18,11 @@ export default class Home extends Component {
           error: true
         })
       } else {
-        this.props.history.push('/chat')
+        this.props.history.push(`/chat?user=${data.payload}`)
       }
     })
   }
+  componentDidMount = () => {}
 
   render() {
     const { submitHandler } = this
@@ -35,3 +36,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default Home
