@@ -1,0 +1,31 @@
+.grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr 70px;
+  grid-template-areas: 'SidebarArea MessagesArea' '. TypingArea';
+  background-color: rgb(247, 243, 243);
+  box-sizing: border-box;
+}
+
+.TypingArea {
+  grid-area: TypingArea;
+  padding: 10px 0;
+}
+
+.SidebarArea {
+  grid-area: SidebarArea;
+}
+
+.MessagesArea {
+  grid-area: MessagesArea;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding-right: 20px;
+}
+.message {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 4px;
+}

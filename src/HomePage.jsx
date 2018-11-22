@@ -5,12 +5,21 @@ const socket = io('http://localhost:4000')
 
 export default class HomePage extends Component {
   state = {
-    message: []
+    message: [{}],
+    limit: 10
   }
   componentDidMount = () => {
-    socket.on('new message', data => {
+    socket.emit('getAllMessages', this.state.limit)
+    socket.on('getAllMessages', data => {
+      console.log(data)
       this.setState({
-        message: [...this.state.message, data.message]
+        message: [...this.state.message, ...data]
+      })
+    })
+    socket.on('newMessage', data => {
+      console.log(data)
+      this.setState({
+        message: [...this.state.message, data]
       })
     })
   }
@@ -27,13 +36,20 @@ export default class HomePage extends Component {
   emitChange = e => {
     socket.emit('chat', JSON.stringify(e.target.value))
   }
+
+  getMoreMessages = e => {
+    const { limit } = this.state
+    socket.emit('getAllMessages', limit)
+  }
   render() {
     return (
       <div className="grid-container">
         <div className="SidebarArea" />
         <div className="MessagesArea">
           {this.state.message.map((m, i) => (
-            <p key={i}>{m}</p>
+            <p className="message" key={i}>
+              {m.text}
+            </p>
           ))}
         </div>
         <form className="TypingArea" onSubmit={this.handleSubmit}>
@@ -45,6 +61,9 @@ export default class HomePage extends Component {
             placeholder="Message"
           />
           <input type="submit" value="Send" />
+          <button type="button" onClick={this.getMoreMessages}>
+            get more messages
+          </button>
         </form>
       </div>
     )
